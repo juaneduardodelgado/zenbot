@@ -2,11 +2,15 @@ var glob = require('glob')
   , path = require('path')
 
 module.exports = function (cb) {
+  var conf_file = process.env.CONF || './conf';
+  console.log('conf =>', conf_file);
+
   var zenbot = require('./')()
   try {
-    var c = require('./conf')
+    var c = require(conf_file)
   }
   catch (e) {
+    console.log('error reading conf:', e);
     c = {}
   }
   var defaults = require('./conf-sample')
